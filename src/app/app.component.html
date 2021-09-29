@@ -1,12 +1,13 @@
 <div class="app-header">
-    <img class="header-logo" src="../assets/logo.svg" alt="">
-    <span class="header-title">{{headerTitle}}</span>
+    <img class="header-logo" src="../assets/logo.svg" alt="" />
+    <span class="header-title">{{ headerTitle }}</span>
 </div>
 
-<!--<app-auth></app-auth>-->
-<app-input></app-input>
-<app-table></app-table>
+<app-auth *ngIf="!isLogged; else table"></app-auth>
+
+<ng-template #table>
+    <app-input></app-input>
+    <app-table></app-table>
+</ng-template>
 
 <!--<router-outlet></router-outlet>-->
-
-

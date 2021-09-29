@@ -1,65 +1,93 @@
 <div class="auth">
-    <img src="../../assets/main.svg" alt="">
+    <img src="../../assets/main.svg" alt="" />
 
     <div class="auth-window">
-        <div class="login-window" *ngIf="!registrationStatus; else register">
-            <p class="auth-window-title">{{windowTitle}}</p>
+        <form
+            class="login-window"
+            *ngIf="!registrationStatus; else register"
+            [formGroup]="loginForm"
+            novalidate
+        >
+            <p class="auth-window-title">{{ windowTitle }}</p>
 
             <div class="login-inputs">
-
                 <div class="login-inputs">
                     <div class="login-input">
                         <label>Login:</label>
-                        <input type="text" placeholder="Login">
+                        <input
+                            type="text"
+                            placeholder="Login"
+                            formControlName="email"
+                        />
                     </div>
 
                     <div class="input-password">
                         <label>Password:</label>
-                        <input type="password" placeholder="Password">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            formControlName="password"
+                        />
                     </div>
                 </div>
 
                 <div class="auth-buttons">
-                    <a class="login-btn">Войти</a>
-                    <a class="register-btn" (click)="toggleLoginToRegistration()">Зарегистрироваться</a>
+                    <a class="login-btn" (click)="handleLogin()">Войти</a>
+                    <a
+                        class="register-btn"
+                        (click)="toggleLoginToRegistration()"
+                        >Зарегистрироваться</a
+                    >
                 </div>
             </div>
-        </div>
+        </form>
 
         <ng-template #register>
-             <div class="register-window">
-                 <p class="register-title">{{windowTitle}}</p>
+            <form class="register-window" [formGroup]="registerForm" novalidate>
+                <p class="register-title">{{ windowTitle }}</p>
 
-                  <div class="register-inputs">
-
-                       <div class="register-inputs">
-                            <div class="login-input">
-                                <label>Login:</label>
-                                <input type="text" placeholder="Login">
-                            </div>
-
-                            <div class="input-password">
-                                <label>Password:</label>
-                                <input type="password" placeholder="Password">
-                            </div>
-
-                            <div class="input-password">
-                                <label>Repeat password:</label>
-                                <input type="password" placeholder="Password">
-                            </div>
-
+                <div class="register-inputs">
+                    <div class="register-inputs">
+                        <div class="login-input">
+                            <label>Login:</label>
+                            <input
+                                type="text"
+                                placeholder="Login"
+                                formControlName="email"
+                            />
                         </div>
 
-                        <div class="register-buttons">
-                            <a class="register-btn">Зарегистрироваться</a>
-                            <a class="login-btn" (click)="toggleLoginToRegistration()">Авторизоваться</a>
+                        <div class="input-password">
+                            <label>Password:</label>
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                formControlName="password"
+                            />
                         </div>
 
+                        <div class="input-password">
+                            <label>Repeat password:</label>
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                formControlName="repeatPassword"
+                            />
+                        </div>
                     </div>
 
+                    <div class="register-buttons">
+                        <a class="register-btn" (click)="handleRegister()"
+                            >Зарегистрироваться</a
+                        >
+                        <a
+                            class="login-btn"
+                            (click)="toggleLoginToRegistration()"
+                            >Авторизоваться</a
+                        >
+                    </div>
                 </div>
-
+            </form>
         </ng-template>
-
     </div>
 </div>
