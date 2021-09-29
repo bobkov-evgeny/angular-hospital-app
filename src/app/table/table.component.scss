@@ -1,0 +1,95 @@
+.table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 25px;
+
+
+    .table-header {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        background: #C4C4C4;
+
+        th {
+            font-weight: 300;
+            font-size: 18px;
+        }
+        .name {
+            width: 240px;
+        }
+        .doctor {
+            width: 230px;
+        }
+        .date {
+            width: 160px;
+        }
+        .complains {
+            width: 200px;
+        }
+        .buttons {
+            width: 118px;
+        }
+    }
+
+    .table-body {
+        position: relative;
+        height: 350px;
+        background: rgba(0,0,0,0);
+        border: 1px solid #000000;
+    }
+
+    .body-markup {
+        background: white;
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        .name {
+            width: 240px;
+        }
+        .doctor {
+            width: 230px;
+        }
+        .date {
+            width: 160px;
+        }
+        .complains {
+            width: 200px;
+        }
+        .buttons {
+            width: 118px;
+        }
+        div {
+            border: 1px solid #000000;
+        }
+    }
+
+    .table-item {
+        display: flex;
+        align-items: flex-start;
+        padding: 25px 0 10px 0;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 300;
+
+        .name {
+            width: 240px;
+        }
+        .doctor {
+            width: 230px;
+        }
+        .date {
+            width: 160px;
+        }
+        .complains {
+            width: 200px;
+        }
+        .buttons {
+            width: 118px;
+        }
+
+    }
+}

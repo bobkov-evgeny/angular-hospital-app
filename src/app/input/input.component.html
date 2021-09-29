@@ -1,0 +1,40 @@
+<div class="input-section">
+
+    <form class="input-form" [formGroup]="inceptionForm" novalidate>
+        <div>
+            <label>Имя:</label>
+            <input name="name" formControlName="userName">
+        </div>
+
+        <div>
+            <label>Врач:</label>
+            <select name="doctor" formControlName="doctorName">
+                <option>Пункт 1</option>
+                <option>Пункт 2</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Дата:</label>
+            <input name="date" type="date" formControlName="date">
+        </div>
+
+
+        <div>
+            <label>Жалобы:</label>
+            <input name="complains" formControlName="complains">
+        </div>
+
+        <a (click)="submit()" >Добавить</a>
+    </form>
+
+
+</div>
+
+
+
+
+
+
+
+
