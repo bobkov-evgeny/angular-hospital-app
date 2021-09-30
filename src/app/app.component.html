@@ -1,9 +1,10 @@
 <div class="app-header">
     <img class="header-logo" src="../assets/logo.svg" alt="" />
     <span class="header-title">{{ headerTitle }}</span>
+    <button class="logout-btn" *ngIf="isLogged" (click)="handleLogout()">Выйти</button>
 </div>
 
-<app-auth *ngIf="!isLogged; else table"></app-auth>
+<app-auth *ngIf="!isLogged; else table" (sendToken)="getToken($event)"></app-auth>
 
 <ng-template #table>
     <app-input></app-input>

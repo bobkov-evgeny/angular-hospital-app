@@ -1,14 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {HttpClient} from "@angular/common/http";
+import {AuthService} from "./auth.service";
+import {Router} from "@angular/router";
+import {User} from "../../assets/interfaces";
+
+export interface Token {
+    token: String
+}
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
 })
+
 export class AuthComponent {
+    @Output() sendToken = new EventEmitter<string>();
+    getToken(str:any) {
+        this.sendToken.emit(str);
+    }
+
     public registrationStatus: boolean = false;
     public windowTitle: string = 'Войти в систему';
+
+    constructor(private http: HttpClient, private auth: AuthService, private router: Router) {
+    }
 
     loginForm: FormGroup = new FormGroup({
         email: new FormControl('', Validators.required),
@@ -22,26 +39,33 @@ export class AuthComponent {
     });
 
     handleLogin() {
-        console.log(this.loginForm.value);
-        this.loginForm.reset();
+        if(this.loginForm.valid) {
+            const {email, password} = this.loginForm.value;
+            const user: User = {
+                email: email,
+                password: password
+            }
+
+            this.auth.login(user).subscribe((response) => {
+                this.loginForm.reset();
+                this.getToken(response.token);
+            })
+        } else {
+            alert('Введите валидные данные')
+        }
     }
 
-    async handleRegister() {
-        try {
-            const form = this.registerForm.value;
-            const data = await fetch('http://localhost:5000/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                },
-                mode: 'no-cors',
-                body: {
-                    email: form.email,
-                    password: form.password,
-                },
-            });
-            console.log(await data.json());
-        } catch (err) {}
+
+
+    handleRegister() {
+        const form = this.registerForm.value;
+        this.http.post<Token>('http://localhost:5000/register', form)
+            .subscribe(response => {
+                console.log(response)
+                this.getToken(response.token);
+            }, error => {
+                console.log(error.error.message)
+            })
     }
 
     toggleLoginToRegistration(): void {
@@ -50,4 +74,7 @@ export class AuthComponent {
             ? 'Регистрация'
             : 'Войти в систему';
     }
+
+
+
 }
