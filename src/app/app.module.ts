@@ -8,8 +8,8 @@ import { InputComponent } from './input/input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableComponent } from './table/table.component';
-import {HttpClientModule} from "@angular/common/http";
-import {AuthService} from "./auth/auth.service";
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
     declarations: [AppComponent, AuthComponent, InputComponent, TableComponent],
@@ -18,7 +18,7 @@ import {AuthService} from "./auth/auth.service";
         AppRoutingModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [AuthService],
     bootstrap: [AppComponent],
